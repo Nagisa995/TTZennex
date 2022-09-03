@@ -1,50 +1,111 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import {
+  DELETE_ICON_SRC,
+  EMPTY_SELECT_MESSAGE,
+  SEARCH_PLACEHOLDER,
+  SELECT_BAR_ICON_SRC,
+  VALUE_ON_UI,
+} from "../../helpers/const";
 import { ISelectData } from "../../mock/mock-data";
+import {
+  DEFAULT_FONT_STYLE,
+  DEFAULT_SELECT_BAR_STYLE,
+  DEFAULT_SELECT_BAR_VALUE_ICON_STYLE,
+  DEFAULT_SELECT_OPTION_LIST,
+  ICurrentStyleSettings,
+  IFontStyle,
+  ISelectBarStyle,
+  ISelectOptionList,
+} from "./custom-select-components/default_style_parameters";
 import { SelectBar } from "./custom-select-components/select-bar";
 import { SelectOptionsMenu } from "./custom-select-components/select-options-menu";
 
 interface ICustomSelect {
   optionsData: ISelectData[];
+  value: React.Dispatch<React.SetStateAction<number[]>>;
+  multiSelect?: boolean;
+  selectPlaceholder?: string;
+  selectBarIconSRC?: string;
+  selectBarValueIconSRC?: string;
+  valueOnUI?: string;
   liveSearch?: boolean;
-  multiChoice?: boolean;
+  liveSearchPlaceholder?: string;
+  liveSearchClearIcon?: string;
+  optionIcon?: boolean;
+  selectFontStyle?: IFontStyle;
+  selectBarStyleSettings?: ISelectBarStyle;
+  selectBarValueIconStyleSettings?: ISelectBarStyle;
+  selectBarOptionListStyleSettings?: ISelectOptionList;
 }
 
 export const CustomSelect: FC<ICustomSelect> = ({
   optionsData,
+  value,
   liveSearch = false,
-  multiChoice = false,
+  multiSelect = false,
+  selectPlaceholder = EMPTY_SELECT_MESSAGE,
+  selectBarIconSRC = SELECT_BAR_ICON_SRC,
+  selectBarValueIconSRC = DELETE_ICON_SRC,
+  valueOnUI = VALUE_ON_UI.STRING,
+  optionIcon = false,
+  liveSearchPlaceholder = SEARCH_PLACEHOLDER,
+  liveSearchClearIcon = DELETE_ICON_SRC,
+  selectBarStyleSettings,
+  selectFontStyle,
+  selectBarValueIconStyleSettings,
+  selectBarOptionListStyleSettings,
 }) => {
-  const defaultValue = optionsData[0];
+  const defaultValue: number[] = [];
   const [isSelectMenuOpen, setIsSelectMenuOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [selectValue, setSelectValue] = useState([defaultValue.id]);
+  const [selectValue, setSelectValue] = useState(defaultValue);
 
-  const handleLeave = () => {
-    setSearchValue("");
-    setIsSelectMenuOpen(false);
+  const currentStyleSettings: ICurrentStyleSettings = {
+    fontStyle: { ...DEFAULT_FONT_STYLE, ...selectFontStyle },
+    selectBar: { ...DEFAULT_SELECT_BAR_STYLE, ...selectBarStyleSettings },
+    selectBarValue: {
+      ...DEFAULT_SELECT_BAR_VALUE_ICON_STYLE,
+      ...selectBarValueIconStyleSettings,
+    },
+    optionList: {
+      ...DEFAULT_SELECT_OPTION_LIST,
+      ...selectBarOptionListStyleSettings,
+    },
   };
+
+  useEffect(() => {
+    value(selectValue);
+  }, [selectValue]);
 
   return (
     <div
       className="select_body"
-      onMouseLeave={handleLeave}
+      style={{ fontFamily: `${currentStyleSettings.fontStyle.fontFamily}` }}
+      onMouseLeave={() => setIsSelectMenuOpen(false)}
       onClick={() => setIsSelectMenuOpen(true)}
     >
       <SelectBar
         optionsData={optionsData}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
+        valueOnUI={valueOnUI}
         selectValue={selectValue}
         setSelectValue={setSelectValue}
-        isSearchActive={liveSearch}
+        isSelectMenuOpen={isSelectMenuOpen}
+        setIsSelectMenuOpen={setIsSelectMenuOpen}
+        selectBarIconSRC={selectBarIconSRC}
+        selectBarValueIconSRC={selectBarValueIconSRC}
+        placeholder={selectPlaceholder}
+        styleSettings={currentStyleSettings}
       />
       {isSelectMenuOpen && (
         <SelectOptionsMenu
           optionsData={optionsData}
           selectValue={selectValue}
           setSelectValue={setSelectValue}
-          currentOptionFilter={searchValue}
-          isMultiChoiceActive={multiChoice}
+          isMultiSelectActive={multiSelect}
+          isLiveSearchActive={liveSearch}
+          isOptionIconActive={optionIcon}
+          searchPlaceholder={liveSearchPlaceholder}
+          liveSearchClearIcon={liveSearchClearIcon}
+          styleSettings={currentStyleSettings}
         />
       )}
     </div>

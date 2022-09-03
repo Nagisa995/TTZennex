@@ -1,26 +1,33 @@
 import { FC } from "react";
 import { ISelectData } from "../../../mock/mock-data";
+import { ISelectBarStyle } from "./default_style_parameters";
 
 export interface ISelectValue {
   optionInfo: ISelectData;
-  isMultiChoiseMade: boolean;
+  deleteIcon: string;
+  styleSettings: ISelectBarStyle;
 }
 
 export const SelectValue: FC<ISelectValue> = ({
   optionInfo,
-  isMultiChoiseMade,
+  deleteIcon,
+  styleSettings,
 }) => {
   return (
-    <div className="select_body_bar_value">
+    <div
+      className="select_body_bar_list_value"
+      style={{
+        minHeight: `${styleSettings.height}`,
+        background: `${styleSettings.background}`,
+        border: `${styleSettings.borderSize} ${styleSettings.borderType} ${styleSettings.borderColor}`,
+        borderRadius: `${styleSettings.borderRadius}`,
+        color: `${styleSettings.fontColor}`,
+      }}
+    >
       {optionInfo.title}
-      {isMultiChoiseMade && (
-        <div
-          className="select_body_bar_value_delete"
-          id={optionInfo.id.toString()}
-        >
-          x
-        </div>
-      )}
+      <div className="select_body_bar_list_value_delete">
+        <img id={optionInfo.id.toString()} src={deleteIcon} alt="" />
+      </div>
     </div>
   );
 };
