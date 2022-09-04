@@ -3,7 +3,7 @@ import { ISelectData } from "../../../mock/mock-data";
 import { OptionNotFound } from "./select-search-not-found";
 import { SelectOption } from "./select-option";
 import { SelectSearchInput } from "./select-search-inpit";
-import { changeSelectValue } from "../../../helpers/utils";
+import { changeSelectValue, getBorderStyle } from "../../../helpers/utils";
 import { ICurrentStyleSettings } from "./default_style_parameters";
 
 interface ISelectOptionsMenu {
@@ -35,13 +35,14 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
     ? optionsData.filter((element) => element.title.includes(searchValue))
     : optionsData;
 
-  const selectOptionList = currentOptionList.map((element) => (
+  const selectOptionList = currentOptionList.map((element, index) => (
     <SelectOption
       optionData={element}
       key={element.id}
       isActiveOption={selectValue.includes(element.id)}
       isIconActive={isOptionIconActive}
       styleSettings={styleSettings}
+      isFirstChild={index === 0}
     />
   ));
 
@@ -51,7 +52,11 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
     <div
       className="select_body_options"
       style={{
-        border: `${styleSettings.optionList.borderSize} ${styleSettings.optionList.borderType} ${styleSettings.optionList.borderColor}`,
+        border: getBorderStyle(
+          styleSettings.optionList.borderSize,
+          styleSettings.optionList.borderType,
+          styleSettings.optionList.borderColor
+        ),
         borderTop: "none",
         borderRadius: `${styleSettings.optionList.borderRadius}`,
         fontSize: `${styleSettings.fontStyle.fontSize}`,

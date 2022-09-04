@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { VALUE_ON_UI } from "../../../helpers/const";
+import { getBorderStyle } from "../../../helpers/utils";
 import { ISelectData } from "../../../mock/mock-data";
 import { ICurrentStyleSettings } from "./default_style_parameters";
 import { SelectValue } from "./select-value";
@@ -52,7 +53,11 @@ export const SelectBar: FC<ISelectBar> = ({
     <div
       className="select_body_bar"
       style={{
-        border: `${styleSettings.selectBar.borderSize} ${styleSettings.selectBar.borderType} ${styleSettings.selectBar.borderColor}`,
+        border: getBorderStyle(
+          styleSettings.selectBar.borderSize,
+          styleSettings.selectBar.borderType,
+          styleSettings.selectBar.borderColor
+        ),
         width: `${styleSettings.selectBar.width}`,
         minHeight: `${styleSettings.selectBar.height}`,
         borderRadius: `${styleSettings.selectBar.borderRadius}`,

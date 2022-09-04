@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { getBorderStyle } from "../../../helpers/utils";
 import { ISelectData } from "../../../mock/mock-data";
 import { ICurrentStyleSettings } from "./default_style_parameters";
 
@@ -7,6 +8,7 @@ interface ISelectOption {
   isActiveOption: boolean;
   isIconActive: boolean;
   styleSettings: ICurrentStyleSettings;
+  isFirstChild: boolean;
 }
 
 export const SelectOption: FC<ISelectOption> = ({
@@ -14,6 +16,7 @@ export const SelectOption: FC<ISelectOption> = ({
   isActiveOption,
   isIconActive,
   styleSettings,
+  isFirstChild,
 }) => {
   return (
     <div
@@ -24,7 +27,13 @@ export const SelectOption: FC<ISelectOption> = ({
             ? styleSettings.optionList.activeBackground
             : styleSettings.optionList.background
         }`,
-        borderTop: `${styleSettings.optionList.dividerSize} ${styleSettings.optionList.dividerType} ${styleSettings.optionList.dividerColor}`,
+        borderTop: isFirstChild
+          ? "none"
+          : getBorderStyle(
+              styleSettings.optionList.dividerSize,
+              styleSettings.optionList.dividerType,
+              styleSettings.optionList.dividerColor
+            ),
       }}
       className="select_body_options_list_option"
       id={optionData.id.toString()}

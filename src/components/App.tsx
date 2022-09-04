@@ -12,16 +12,31 @@ export const App: FC = () => {
         liveSearch={true}
         valueOnUI="icon"
         value={setTestValue}
-        selectPlaceholder='anmwpodqmn'
+        selectPlaceholder="anmwpodqmn"
       />
-      <CustomSelect optionsData={mockData} value={setTestValue} />
+      <CustomSelect
+        optionsData={mockData}
+        value={setTestValue}
+        selectBarStyleSettings={{
+          width: "600px",
+          borderColor: "green",
+          fontColor: "red",
+          background: "lightgrey",
+        }}
+      />
       <CustomSelect
         optionsData={mockData}
         multiSelect={true}
         liveSearch={true}
         optionIcon={true}
         value={setTestValue}
-        liveSearchPlaceholder='[dpqwmo,q[pd'
+        liveSearchPlaceholder="[dpqwmo,q[pd"
+        selectBarOptionListStyleSettings={{
+          listHeight: "400px",
+          dividerSize: "3px",
+          dividerType: "dotted",
+          borderColor: "coral",
+        }}
       />
       <CustomSelect
         optionsData={mockData}

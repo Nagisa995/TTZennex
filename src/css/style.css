@@ -105,6 +105,7 @@
 
 .select_input {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 0.5rem 1.5rem;
 }
@@ -117,4 +118,9 @@
   max-height: 15px;
   -o-object-fit: cover;
      object-fit: cover;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }/*# sourceMappingURL=style.css.map */

@@ -6,12 +6,9 @@ import {
   SELECT_BAR_ICON_SRC,
   VALUE_ON_UI,
 } from "../../helpers/const";
+import { getCurrentStyleSettings } from "../../helpers/utils";
 import { ISelectData } from "../../mock/mock-data";
 import {
-  DEFAULT_FONT_STYLE,
-  DEFAULT_SELECT_BAR_STYLE,
-  DEFAULT_SELECT_BAR_VALUE_ICON_STYLE,
-  DEFAULT_SELECT_OPTION_LIST,
   ICurrentStyleSettings,
   IFontStyle,
   ISelectBarStyle,
@@ -50,27 +47,21 @@ export const CustomSelect: FC<ICustomSelect> = ({
   optionIcon = false,
   liveSearchPlaceholder = SEARCH_PLACEHOLDER,
   liveSearchClearIcon = DELETE_ICON_SRC,
-  selectBarStyleSettings,
-  selectFontStyle,
-  selectBarValueIconStyleSettings,
-  selectBarOptionListStyleSettings,
+  selectBarStyleSettings = {},
+  selectFontStyle = {},
+  selectBarValueIconStyleSettings = {},
+  selectBarOptionListStyleSettings = {},
 }) => {
   const defaultValue: number[] = [];
   const [isSelectMenuOpen, setIsSelectMenuOpen] = useState(false);
   const [selectValue, setSelectValue] = useState(defaultValue);
 
-  const currentStyleSettings: ICurrentStyleSettings = {
-    fontStyle: { ...DEFAULT_FONT_STYLE, ...selectFontStyle },
-    selectBar: { ...DEFAULT_SELECT_BAR_STYLE, ...selectBarStyleSettings },
-    selectBarValue: {
-      ...DEFAULT_SELECT_BAR_VALUE_ICON_STYLE,
-      ...selectBarValueIconStyleSettings,
-    },
-    optionList: {
-      ...DEFAULT_SELECT_OPTION_LIST,
-      ...selectBarOptionListStyleSettings,
-    },
-  };
+  const currentStyleSettings: ICurrentStyleSettings = getCurrentStyleSettings(
+    selectFontStyle,
+    selectBarStyleSettings,
+    selectBarValueIconStyleSettings,
+    selectBarOptionListStyleSettings
+  );
 
   useEffect(() => {
     value(selectValue);

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { getBorderStyle } from "../../../helpers/utils";
 import { ISelectData } from "../../../mock/mock-data";
 import { ISelectBarStyle } from "./default_style_parameters";
 
@@ -19,7 +20,11 @@ export const SelectValue: FC<ISelectValue> = ({
       style={{
         minHeight: `${styleSettings.height}`,
         background: `${styleSettings.background}`,
-        border: `${styleSettings.borderSize} ${styleSettings.borderType} ${styleSettings.borderColor}`,
+        border: getBorderStyle(
+          styleSettings.borderSize,
+          styleSettings.borderType,
+          styleSettings.borderColor
+        ),
         borderRadius: `${styleSettings.borderRadius}`,
         color: `${styleSettings.fontColor}`,
       }}

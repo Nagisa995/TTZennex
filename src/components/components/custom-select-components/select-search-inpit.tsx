@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { getBorderStyle } from "../../../helpers/utils";
 import { ICurrentStyleSettings } from "./default_style_parameters";
 
 interface ISelectSearchInput {
@@ -20,7 +21,11 @@ export const SelectSearchInput: FC<ISelectSearchInput> = ({
     <div
       style={{
         maxHeight: `${styleSettings.optionList.optionHeight}`,
-        borderBottom: `${styleSettings.optionList.dividerSize} ${styleSettings.optionList.dividerType} ${styleSettings.optionList.dividerColor}`,
+        borderBottom: getBorderStyle(
+          styleSettings.optionList.dividerSize,
+          styleSettings.optionList.dividerType,
+          styleSettings.optionList.dividerColor
+        ),
         borderRadius: `${styleSettings.optionList.borderRadius}`,
       }}
       className="select_input"
@@ -36,7 +41,7 @@ export const SelectSearchInput: FC<ISelectSearchInput> = ({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleChange(e.target.value)
         }
-      ></input>
+      />
       <img
         onClick={() => handleChange("")}
         className="select_input_clear"
