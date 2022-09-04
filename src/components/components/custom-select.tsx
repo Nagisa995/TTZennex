@@ -19,7 +19,7 @@ import { SelectOptionsMenu } from "./custom-select-components/select-options-men
 
 interface ICustomSelect {
   optionsData: ISelectData[];
-  value: React.Dispatch<React.SetStateAction<number[]>>;
+  setValue: React.Dispatch<React.SetStateAction<number[]>>;
   multiSelect?: boolean;
   selectPlaceholder?: string;
   selectBarIconSRC?: string;
@@ -37,7 +37,7 @@ interface ICustomSelect {
 
 export const CustomSelect: FC<ICustomSelect> = ({
   optionsData,
-  value,
+  setValue,
   liveSearch = false,
   multiSelect = false,
   selectPlaceholder = EMPTY_SELECT_MESSAGE,
@@ -64,7 +64,7 @@ export const CustomSelect: FC<ICustomSelect> = ({
   );
 
   useEffect(() => {
-    value(selectValue);
+    setValue(selectValue);
   }, [selectValue]);
 
   return (
