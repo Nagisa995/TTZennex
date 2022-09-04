@@ -20,7 +20,9 @@ import { SelectOptionsMenu } from "./custom-select-components/select-options-men
 interface ICustomSelect {
   optionsData: ISelectData[];
   setValue: React.Dispatch<React.SetStateAction<number[]>>;
+  defaultValue?: number[];
   multiSelect?: boolean;
+  maxOptionSelect?: number;
   selectPlaceholder?: string;
   selectBarIconSRC?: string;
   selectBarValueIconSRC?: string;
@@ -38,8 +40,10 @@ interface ICustomSelect {
 export const CustomSelect: FC<ICustomSelect> = ({
   optionsData,
   setValue,
+  defaultValue = [],
   liveSearch = false,
   multiSelect = false,
+  maxOptionSelect = Infinity,
   selectPlaceholder = EMPTY_SELECT_MESSAGE,
   selectBarIconSRC = SELECT_BAR_ICON_SRC,
   selectBarValueIconSRC = DELETE_ICON_SRC,
@@ -52,7 +56,6 @@ export const CustomSelect: FC<ICustomSelect> = ({
   selectBarValueIconStyleSettings = {},
   selectBarOptionListStyleSettings = {},
 }) => {
-  const defaultValue: number[] = [];
   const [isSelectMenuOpen, setIsSelectMenuOpen] = useState(false);
   const [selectValue, setSelectValue] = useState(defaultValue);
 
@@ -92,6 +95,7 @@ export const CustomSelect: FC<ICustomSelect> = ({
           selectValue={selectValue}
           setSelectValue={setSelectValue}
           isMultiSelectActive={multiSelect}
+          maxOptionSelect={maxOptionSelect}
           isLiveSearchActive={liveSearch}
           isOptionIconActive={optionIcon}
           searchPlaceholder={liveSearchPlaceholder}

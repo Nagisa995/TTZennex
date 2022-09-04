@@ -43,6 +43,8 @@ export const App: FC = () => {
         multiSelect={true}
         valueOnUI="icon"
         setValue={setTestValue}
+        defaultValue={testValue}
+        maxOptionSelect={3}
       />
     </div>
   );

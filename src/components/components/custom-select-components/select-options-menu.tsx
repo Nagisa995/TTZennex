@@ -11,6 +11,7 @@ interface ISelectOptionsMenu {
   selectValue: number[];
   setSelectValue: React.Dispatch<React.SetStateAction<number[]>>;
   isMultiSelectActive: boolean;
+  maxOptionSelect: number;
   isLiveSearchActive: boolean;
   isOptionIconActive: boolean;
   searchPlaceholder: string;
@@ -23,6 +24,7 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
   setSelectValue,
   selectValue,
   isMultiSelectActive,
+  maxOptionSelect,
   isLiveSearchActive,
   isOptionIconActive,
   searchPlaceholder,
@@ -76,6 +78,9 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
         className="select_body_options_list"
         style={{ maxHeight: `${styleSettings.optionList.listHeight}` }}
         onClick={(e: any) => {
+          const isValueOverLimit = selectValue.length >= maxOptionSelect;
+          if (isValueOverLimit) return;
+
           setSelectValue(
             changeSelectValue(
               Number(e.target.id),
