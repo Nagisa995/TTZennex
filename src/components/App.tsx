@@ -11,12 +11,12 @@ export const App: FC = () => {
         optionsData={mockData}
         liveSearch={true}
         valueOnUI="icon"
-        value={setTestValue}
+        setValue={setTestValue}
         selectPlaceholder="anmwpodqmn"
       />
       <CustomSelect
         optionsData={mockData}
-        value={setTestValue}
+        setValue={setTestValue}
         selectBarStyleSettings={{
           width: "600px",
           borderColor: "green",
@@ -29,7 +29,7 @@ export const App: FC = () => {
         multiSelect={true}
         liveSearch={true}
         optionIcon={true}
-        value={setTestValue}
+        setValue={setTestValue}
         liveSearchPlaceholder="[dpqwmo,q[pd"
         selectBarOptionListStyleSettings={{
           listHeight: "400px",
@@ -42,7 +42,7 @@ export const App: FC = () => {
         optionsData={mockData}
         multiSelect={true}
         valueOnUI="icon"
-        value={setTestValue}
+        setValue={setTestValue}
       />
     </div>
   );
