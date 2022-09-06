@@ -52,7 +52,7 @@
   width: 15px;
   height: 15px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 .select_body_bar_icon img {
