@@ -50,3 +50,10 @@ export const getBorderStyle = (
 ): string => {
   return `${size} ${type} ${color}`;
 };
+
+export const caseInsensitiveComparison = (
+  title: string,
+  filter: string
+): boolean => {
+  return title.toLowerCase().includes(filter.trim().toLowerCase());
+};

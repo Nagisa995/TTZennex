@@ -73,46 +73,41 @@
     position: absolute;
     top: 100%;
     width: 100%;
+    z-index: 999;
 
-    &_list {
-      overflow: auto;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      cursor: pointer;
-      user-select: none;
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    cursor: pointer;
+    user-select: none;
 
-      &_option {
-        display: flex;
-        align-items: center;
+    &_option {
+      display: flex;
+      align-items: center;
 
-        padding: 0.5rem;
+      padding: 0.5rem;
 
-        img {
-          flex: 0 1 10%;
+      img {
+        flex: 0 1 10%;
 
-          margin-right: 5px;
+        margin-right: 5px;
 
-          max-width: 15px;
-          max-height: 15px;
-          object-fit: cover;
-        }
-      }
-
-      &_option:first-child {
-        border-top: none;
-      }
-
-      .not_found_message {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0.5rem;
+        max-width: 7.5%;
+        max-height: 7.5%;
+        object-fit: cover;
       }
     }
-    &_list::-webkit-scrollbar {
-      width: 0;
-      height: 0;
+
+    .not_found_message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem;
     }
+  }
+  &_options::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }
 

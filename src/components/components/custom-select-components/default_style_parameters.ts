@@ -33,7 +33,7 @@ export const DEFAULT_SELECT_BAR_STYLE: ISelectBarStyle = {
   borderType: "solid",
   borderColor: "black",
   borderRadius: "5px",
-  background: "none",
+  background: "white",
   fontColor: "black",
 };
 
@@ -73,6 +73,6 @@ export const DEFAULT_SELECT_OPTION_LIST: ISelectOptionList = {
   dividerSize: "1px",
   dividerType: "solid",
   dividerColor: "black",
-  background: "none",
+  background: "white",
   activeBackground: "lightgreen",
 };

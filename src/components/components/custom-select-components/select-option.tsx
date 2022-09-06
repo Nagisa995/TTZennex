@@ -35,7 +35,7 @@ export const SelectOption: FC<ISelectOption> = ({
               styleSettings.optionList.dividerColor
             ),
       }}
-      className="select_body_options_list_option"
+      className="select_body_options_option"
       id={optionData.id.toString()}
     >
       {isIconActive && <img src={optionData.thumbnailUrl} />}

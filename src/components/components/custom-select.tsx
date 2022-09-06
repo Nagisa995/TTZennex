@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import {
+  DEFAULT_TAB_INDEX,
   DELETE_ICON_SRC,
   EMPTY_SELECT_MESSAGE,
   SEARCH_PLACEHOLDER,
@@ -20,6 +21,7 @@ import { SelectOptionsMenu } from "./custom-select-components/select-options-men
 interface ICustomSelect {
   optionsData: ISelectData[];
   setValue: React.Dispatch<React.SetStateAction<number[]>>;
+  tabIndex?: number;
   defaultValue?: number[];
   multiSelect?: boolean;
   maxOptionSelect?: number;
@@ -41,6 +43,7 @@ export const CustomSelect: FC<ICustomSelect> = ({
   optionsData,
   setValue,
   defaultValue = [],
+  tabIndex = DEFAULT_TAB_INDEX,
   liveSearch = false,
   multiSelect = false,
   maxOptionSelect = Infinity,
@@ -73,9 +76,18 @@ export const CustomSelect: FC<ICustomSelect> = ({
   return (
     <div
       className="select_body"
-      style={{ fontFamily: `${currentStyleSettings.fontStyle.fontFamily}` }}
-      onMouseLeave={() => setIsSelectMenuOpen(false)}
-      onClick={() => setIsSelectMenuOpen(true)}
+      style={{
+        fontFamily: `${currentStyleSettings.fontStyle.fontFamily}`,
+        width: `${currentStyleSettings.selectBar.width}`,
+      }}
+      tabIndex={tabIndex}
+      onFocus={(e) => {
+        setIsSelectMenuOpen(true);
+      }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget))
+          setIsSelectMenuOpen(false);
+      }}
     >
       <SelectBar
         optionsData={optionsData}

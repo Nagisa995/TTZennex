@@ -3,7 +3,11 @@ import { ISelectData } from "../../../mock/mock-data";
 import { OptionNotFound } from "./select-search-not-found";
 import { SelectOption } from "./select-option";
 import { SelectSearchInput } from "./select-search-inpit";
-import { changeSelectValue, getBorderStyle } from "../../../helpers/utils";
+import {
+  caseInsensitiveComparison,
+  changeSelectValue,
+  getBorderStyle,
+} from "../../../helpers/utils";
 import { ICurrentStyleSettings } from "./default_style_parameters";
 
 interface ISelectOptionsMenu {
@@ -34,7 +38,9 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
   const [searchValue, setSearchValue] = useState("");
 
   const currentOptionList = isLiveSearchActive
-    ? optionsData.filter((element) => element.title.includes(searchValue))
+    ? optionsData.filter((element) =>
+        caseInsensitiveComparison(element.title, searchValue)
+      )
     : optionsData;
 
   const selectOptionList = currentOptionList.map((element, index) => (
@@ -59,10 +65,11 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
           styleSettings.optionList.borderType,
           styleSettings.optionList.borderColor
         ),
-        borderTop: "none",
         borderRadius: `${styleSettings.optionList.borderRadius}`,
         fontSize: `${styleSettings.fontStyle.fontSize}`,
         color: `${styleSettings.optionList.fontColor}`,
+        maxHeight: `${styleSettings.optionList.listHeight}`,
+        background: `${styleSettings.optionList.background}`,
       }}
     >
       {isLiveSearchActive && (
@@ -75,8 +82,6 @@ export const SelectOptionsMenu: FC<ISelectOptionsMenu> = ({
         />
       )}
       <div
-        className="select_body_options_list"
-        style={{ maxHeight: `${styleSettings.optionList.listHeight}` }}
         onClick={(e: any) => {
           const isValueOverLimit = selectValue.length >= maxOptionSelect;
           if (isValueOverLimit) return;

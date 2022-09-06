@@ -58,7 +58,6 @@ export const SelectBar: FC<ISelectBar> = ({
           styleSettings.selectBar.borderType,
           styleSettings.selectBar.borderColor
         ),
-        width: `${styleSettings.selectBar.width}`,
         minHeight: `${styleSettings.selectBar.height}`,
         borderRadius: `${styleSettings.selectBar.borderRadius}`,
         background: `${styleSettings.selectBar.background}`,

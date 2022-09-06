@@ -26,7 +26,6 @@ export const SelectSearchInput: FC<ISelectSearchInput> = ({
           styleSettings.optionList.dividerType,
           styleSettings.optionList.dividerColor
         ),
-        borderRadius: `${styleSettings.optionList.borderRadius}`,
       }}
       className="select_input"
     >
@@ -34,6 +33,7 @@ export const SelectSearchInput: FC<ISelectSearchInput> = ({
         type="text"
         style={{
           fontSize: `${styleSettings.fontStyle.fontSize}`,
+          background: `${styleSettings.optionList.background}`,
           color: `${styleSettings.optionList.fontColor}`,
         }}
         placeholder={placeholder}

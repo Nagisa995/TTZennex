@@ -10,3 +10,5 @@ export enum VALUE_ON_UI {
 export const EMPTY_SELECT_MESSAGE = "Выберите один из предложенных вариантов";
 
 export const SEARCH_PLACEHOLDER = "Поиск ...";
+
+export const DEFAULT_TAB_INDEX = 999;
