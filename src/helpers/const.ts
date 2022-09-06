@@ -11,4 +11,4 @@ export const EMPTY_SELECT_MESSAGE = "Выберите один из предло
 
 export const SEARCH_PLACEHOLDER = "Поиск ...";
 
-export const DEFAULT_TAB_INDEX = 999;
+export const DEFAULT_TAB_INDEX = 0;
